@@ -11,8 +11,6 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    display: flex;
-    flex-direction: column;
 }
 
 .container {
@@ -21,14 +19,13 @@ body {
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     width: 80%;
-    max-width: 900px;
+    max-width: 500px;
     text-align: center;
 }
 
 .game-info,
 .status {
     margin-bottom: 20px;
-    margin-top: 30px;
 }
 
 .word {
@@ -78,38 +75,11 @@ body {
     cursor: pointer;
 }
 
+.tecla-usada {
+    opacity: 0.5;
+}
+
 #placar {
     font-size: 18px;
     margin-top: 20px;
-}
-
-/* IMPLEMENTAÇÃO ODAIR */
-
-img {
-    width: 300px;
-    height: 300px;
-}
-
-.encontrar{
-    display: flex;
-    gap: 10px;
-}
-
-.card-letter{
-    width: 150px;
-    height: 200px;
-    background-color: beige;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 80px;
-    border-radius: 20px;
-}
-
-.card-letter p{
-    opacity: 0;
-}
-
-p .e{
-    opacity: 100;
 }

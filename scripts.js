@@ -63,7 +63,8 @@ function configurarTecladoVirtual() {
     letras.forEach(letra => {
         const btn = document.createElement('button');
         btn.textContent = letra;
-        btn.addEventListener('click', () => tentarLetra(letra));
+        btn.classList.add('tecla');
+        btn.addEventListener('click', () => tentarLetra(letra, btn));
         virtualKeyboard.appendChild(btn);
     });
 }
@@ -74,8 +75,11 @@ function atualizarPalavra() {
 }
 
 // Função para processar a tentativa de uma letra
-function tentarLetra(letra) {
+function tentarLetra(letra, btn) {
     if (!jogoAtivo || letrasUsadas.includes(letra)) return;
+
+    btn.disabled = true;
+    btn.classList.add('tecla-usada');
 
     letrasUsadas.push(letra);
     letrasUsadasElement.textContent = letrasUsadas.join(', ');
