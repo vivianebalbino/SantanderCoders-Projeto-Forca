@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jogo da Forca</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Jogo da Forca</h1>
+        <div class="game-info">
+            <p><strong>Dica:</strong> <span id="dica">_________</span></p>
+            <p><strong>Tema:</strong> <span id="tema">_________</span></p>
+        </div>
+
+        <div class="word">
+            <p id="palavra">_ _ _ _ _ _ _ _</p>
+        </div>
+
+        <div class="status">
+            <p><strong>Letras usadas:</strong> <span id="letras-usadas"></span></p>
+            <p><strong>Tentativas restantes:</strong> <span id="tentativas">6</span></p>
+        </div>
+
+        <div class="forca">
+            <div id="forca">
+                <div id="head" class="boneco-part">O</div>
+                <div id="body" class="boneco-part">|</div>
+                <div id="left-arm" class="boneco-part">/</div>
+                <div id="right-arm" class="boneco-part">\</div>
+                <div id="left-leg" class="boneco-part">/</div>
+                <div id="right-leg" class="boneco-part">\</div>
+            </div>
+
+        </div>
+
+        <div class="keyboard">
+            <div id="virtual-keyboard"></div>
+        </div>
+
+        <div class="actions">
+            <input type="text" id="chute-palavra" placeholder="Digite sua palavra" />
+            <button id="btn-chutar-palavra">Chutar Palavra</button>
+            <button id="btn-reiniciar">Reiniciar</button>
+        </div>
+    </div>
+    <div id="placar">
+        Vitórias: <span id="vitorias"></span> | Derrotas: <span id="derrotas">0</span>
+    </div>
+
+    <script src="scripts.js"></script>
+</body>
+
+</html>

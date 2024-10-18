@@ -1,0 +1,81 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 80%;
+    max-width: 500px;
+    text-align: center;
+}
+
+.game-info,
+.status {
+    margin-bottom: 20px;
+}
+
+.word {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.forca pre {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.keyboard {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.keyboard button {
+    margin: 5px;
+    padding: 10px 15px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.keyboard button.disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+.actions {
+    margin-top: 20px;
+}
+
+.actions input {
+    padding: 10px;
+    width: 200px;
+    margin-right: 10px;
+}
+
+.actions button {
+    padding: 10px;
+    cursor: pointer;
+}
+
+#placar {
+    font-size: 18px;
+    margin-top: 20px;
+}
