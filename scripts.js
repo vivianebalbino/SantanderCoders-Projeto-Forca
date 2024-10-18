@@ -203,6 +203,45 @@ async function sortearPokemon() {
     }
 }
 
+// Mostrar array com os pokemons
 sortearPokemon().then((pokemon) => console.log(pokemon))
 
+async function selecionarDados () {
+    const pokemon = await sortearPokemon()
 
+    const imgPokemon = document.querySelector('#pokeImg')
+    imgPokemon.src = pokemon.pokemonImg
+
+    const pokeName = document.querySelector('#pokeName')
+    pokeName.innerText = pokemon.pokemonSorteado
+
+    const unders = pokemon.pokemonSorteado
+    const letters = unders.split('')
+    console.log(letters.length)
+    console.log(letters)
+
+    const encontrar = document.querySelector('.encontrar')
+
+    letters.forEach(item => {
+        const novoCard = document.createElement('div')
+        const letterElement = document.createElement('p')
+        letterElement.innerText = item
+
+        novoCard.appendChild(letterElement)
+
+        novoCard.setAttribute('data-letra', item)
+        novoCard.classList.add(`card-letter`,`${item}`)
+        encontrar.appendChild(novoCard)
+
+        novoCard.addEventListener('click', () => {
+            handleShow(item)
+            letterElement.style.opacity = 100
+        })
+    });
+}
+
+selecionarDados()
+
+function handleShow(item){
+    
+}
