@@ -35,7 +35,6 @@ function atualizarPlacar() {
     console.log(`Vitórias: ${vitorias}, Derrotas: ${derrotas}`);
 }
 
-
 // Array com palavras, dicas e temas
 const palavrasForca = [
     { palavra: "JAVASCRIPT", dica: "Linguagem de Programação", tema: "Tecnologia" },
