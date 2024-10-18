@@ -170,3 +170,39 @@ btnReiniciar.addEventListener('click', reiniciarJogo);
 configurarTecladoVirtual();
 atualizarPlacar();
 reiniciarJogo();
+
+async function sortearPokemon() {
+    try {
+        const response = await fetch(`https://pokeapi.co/api/v2/pokemon/?offset=20&limit=200`)
+
+        if (!response.ok) {
+            throw new Error('Erro na requisição')
+        }
+        const data = await response.json()
+
+        const infos = []
+
+        data.results.forEach(item => {
+            infos.push({ name: item.name, url: item.url })
+        })
+
+        const pokemon = (infos[Math.floor(Math.random() * (infos.length))])
+
+        const pokemonResponse = await fetch(pokemon.url)
+        const pokemonData = await pokemonResponse.json()
+
+        const pokeData = {
+            pokemonSorteado: pokemon.name,
+            pokemonImg: pokemonData.sprites.other["dream_world"].front_default
+        }
+
+        return pokeData
+
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+sortearPokemon().then((pokemon) => console.log(pokemon))
+
+
