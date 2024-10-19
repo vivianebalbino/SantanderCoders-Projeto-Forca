@@ -23,16 +23,17 @@ let palavraAtual = '';
 let tentativasRestantes = 6;
 let palavraExibida = [];
 let jogoAtivo = true;
+let placarVitorias = parseInt(sessionStorage.getItem('vitorias')) || 0;
+let placaDerrotas = parseInt(sessionStorage.getItem('derrotas')) || 0;
 
-// ------------------------------
-// Scores
-// ------------------------------
-let vitorias = 0;
-let derrotas = 0;
 
-// ------------------------------
-// Game Configuration
-// ------------------------------
+function atualizarPlacar() {
+    localStorage.setItem('vitorias', vitorias);
+    localStorage.setItem('derrotas', derrotas);
+    console.log(`Vitórias: ${vitorias}, Derrotas: ${derrotas}`);
+}
+
+// Array com palavras, dicas e temas
 const palavrasForca = [
     { palavra: "JAVASCRIPT", dica: "Linguagem de Programação", tema: "Tecnologia" },
     { palavra: "ELEFANTE", dica: "Maior animal terrestre", tema: "Animais" },
@@ -141,6 +142,7 @@ function mostrarParteDoBoneco() {
 function verificarVitoria() {
     if (palavraExibida.join('') === palavraAtual) {
         alert('Parabéns, você venceu!');
+        atualizarPlacar('V');
         jogoAtivo = false;
         disableKeyboard();
     }
@@ -149,6 +151,7 @@ function verificarVitoria() {
 function verificarDerrota() {
     if (tentativasRestantes === 0) {
         alert(`Você perdeu! A palavra era: ${palavraAtual}`);
+        atualizarPlacar('D');
         jogoAtivo = false;
         disableKeyboard();
     }
@@ -194,9 +197,11 @@ btnChutarPalavra.addEventListener('click', () => {
     const chute = chutePalavraInput.value.toUpperCase();
     if (chute === palavraAtual) {
         alert('Parabéns, você venceu!');
+        atualizarPlacar('V');
         jogoAtivo = false;
     } else {
         alert(`Você errou! A palavra era: ${palavraAtual}`);
+        atualizarPlacar('D');
         jogoAtivo = false;
     }
 });
@@ -235,9 +240,11 @@ async function sortearPokemon() {
     }
 }
 
-// Function to display Pokémon data
-async function selecionarDados() {
-    const pokemon = await sortearPokemon();
+// Mostrar array com os pokemons
+sortearPokemon().then((pokemon) => console.log(pokemon))
+
+async function selecionarDados () {
+    const pokemon = await sortearPokemon()
 
     const imgPokemon = document.querySelector('#pokeImg');
     imgPokemon.src = pokemon.pokemonImg;
@@ -252,9 +259,11 @@ async function selecionarDados() {
         const letterElement = document.createElement('p');
         letterElement.innerText = item;
 
-        novoCard.appendChild(letterElement);
-        novoCard.setAttribute('data-letra', item);
-        novoCard.classList.add(`card-letter`, `${item}`);
+        novoCard.appendChild(letterElement)
+
+        novoCard.setAttribute('data-letra', item)
+        novoCard.classList.add(`card-letter`,`${item}`)
+        encontrar.appendChild(novoCard)
 
         novoCard.addEventListener('click', () => {
             handleShow(item);
@@ -266,6 +275,6 @@ async function selecionarDados() {
 // Start Pokémon selection
 selecionarDados();
 
-function handleShow(item) {
-    // Implementation for handling letter show
+function handleShow(item){
+    
 }
