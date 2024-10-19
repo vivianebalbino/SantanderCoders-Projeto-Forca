@@ -7,20 +7,15 @@
 body {
     font-family: Arial, sans-serif;
     background-color: #f4f4f4;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+    min-height: 100vh;
+    min-width: 30px;
 }
 
 .container {
-    background-color: white;
     padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 80%;
-    max-width: 500px;
     text-align: center;
+    justify-content: space-evenly;
+    align-items: center;
 }
 
 .game-info,
@@ -30,12 +25,12 @@ body {
 
 .word {
     font-size: 24px;
-    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
 }
 
 .forca pre {
     font-size: 24px;
-    margin-bottom: 20px;
 }
 
 .keyboard {
@@ -43,22 +38,11 @@ body {
     flex-wrap: wrap;
     justify-content: center;
     margin-bottom: 20px;
+    max-width: 550px;
+    margin: 0 auto;
 }
 
-.keyboard button {
-    margin: 5px;
-    padding: 10px 15px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
 
-.keyboard button.disabled {
-    background-color: #ccc;
-    cursor: not-allowed;
-}
 
 .actions {
     margin-top: 20px;
@@ -82,4 +66,119 @@ body {
 #placar {
     font-size: 18px;
     margin-top: 20px;
+}
+
+.keyboard button {
+    margin: 5px;
+    padding: 10px 15px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: clamp(0.2rem, 4vw, 1.8rem);  
+}
+
+.keyboard button:disabled {
+    background-color: gray;
+    color: white;
+}
+
+.keyboard button.tecla-correta {
+    background-color: green;
+    color: white;
+}
+
+.keyboard button.tecla-errada {
+    background-color: red;
+    color: white;
+}
+
+header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+    font-size: 12px;
+    font-weight: bold;
+    background-color: #272e43;
+    color: white;
+}
+
+#title {
+    text-align: center;
+    padding: 20px;
+    font-size: clamp(1.5rem, 5vw, 5rem);
+    border-bottom: 1px solid #e3e0f7;
+}
+
+session {
+    padding: 20px;
+}
+
+img {
+    max-width:  100%;
+    height: auto;
+    justify-self: center;
+    align-self: center;
+}
+
+.game {
+    width: 80%;
+    min-width: 300px;
+    margin: auto;
+    padding: 20px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    display: flex;
+    position: relative;
+    flex-direction: column;
+}
+
+.game-info {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    grid-gap: 10px;
+    justify-content: center;
+    align-items: center;
+}
+
+#palavra {
+    font-size: clamp(0.5rem, 5vw, 5rem);
+}
+
+#letras-usadas {
+    text-align: start;
+}
+
+.tentativas {
+    border-radius: 50%;
+    background-color: red;
+    position: absolute;
+    width: clamp(30px, 5vw, 50px);
+    height: clamp(30px, 5vw, 50px);
+    font-size: 3vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    color: white;
+    border: 3px solid white;
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 1);
+    top: clamp(5px, 5vw, 10px);
+    right: clamp(10px, 5vw, 20px);
+}
+
+pre {
+    height: 100px;
+    border: solid 1px black;
+    width: 100px;
+    margin: auto;
+    border-radius: 6px;
+}
+
+h2 {
+    margin: 20px
 }
