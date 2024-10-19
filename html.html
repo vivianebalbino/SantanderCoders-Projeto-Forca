@@ -4,48 +4,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jogo da Forca</title>
+    <title>Pokéforca</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
+    <header>
+        <h1>Pokéforca</h1>
+    </header>
+    <h1 id="title">Jogo da Forca</h1>
 
     <div class="container">
-        <h1>Jogo da Forca</h1>
-        <img src="" id="pokeImg">
-        <div class="encontrar">
-
-        </div>
-        <div class="game-info">
-            <p><strong>Dica:</strong> <span id="dica">_________</span></p>
-            <p><strong>Tema:</strong> <span id="tema">_________</span></p>
-        </div>
-
-        <div id="pokemon">
-            <h1 id="pokeName">Nome Pokemon</h1>
-        </div>
-
-        <div class="word">
-            <p id="palavra">_ _ _ _ _ _ _ _</p>
-        </div>
-
-        <div class="status">
-            <p><strong>Letras usadas:</strong> <span id="letras-usadas"></span></p>
-            <p><strong>Tentativas restantes:</strong> <span id="tentativas">6</span></p>
-        </div>
-
-        <div class="forca">
-            <div id="forca">
-                <div id="head" class="boneco-part">O</div>
-                <div id="body" class="boneco-part">|</div>
-                <div id="left-arm" class="boneco-part">/</div>
-                <div id="right-arm" class="boneco-part">\</div>
-                <div id="left-leg" class="boneco-part">/</div>
-                <div id="right-leg" class="boneco-part">\</div>
+        
+        <h2>Quem é esse pokémon?</h2>
+        
+        <session class="game">
+            <div class="tentativas">
+                <span id="tentativas">6</span>
             </div>
+            <div class="game-info">
 
-        </div>
-
+                <img src="" id="pokeImg">
+                
+                <div class="word">
+                    <p id="palavra">_ _ _ _ _ _ _ _</p>
+                </div>
+            </div>
+                
+            
+            
+            <div class="forca">
+                <pre id="stickmanDrawing"></pre>
+            </div>
+            
+        </session>
         <div class="keyboard">
             <div id="virtual-keyboard"></div>
         </div>

@@ -1,14 +1,14 @@
+// ------------------------------
+// DOM Elements
+// ------------------------------
 const palavraElement = document.getElementById('palavra');
-const dicaElement = document.getElementById('dica');
-const temaElement = document.getElementById('tema');
 const tentativasElement = document.getElementById('tentativas');
-const letrasUsadasElement = document.getElementById('letras-usadas');
 const chutePalavraInput = document.getElementById('chute-palavra');
 const btnChutarPalavra = document.getElementById('btn-chutar-palavra');
 const btnReiniciar = document.getElementById('btn-reiniciar');
 const virtualKeyboard = document.getElementById('virtual-keyboard');
 
-// Elementos do boneco
+// Boneco Elements
 const headElement = document.getElementById('head');
 const bodyElement = document.getElementById('body');
 const leftArmElement = document.getElementById('left-arm');
@@ -16,28 +16,21 @@ const rightArmElement = document.getElementById('right-arm');
 const leftLegElement = document.getElementById('left-leg');
 const rightLegElement = document.getElementById('right-leg');
 
-// Inicialmente, esconder o boneco
-const boneco = [headElement, bodyElement, leftArmElement, rightArmElement, leftLegElement, rightLegElement];
-boneco.forEach(part => part.style.visibility = 'hidden');
-
+// ------------------------------
+// Game Variables
+// ------------------------------
 let palavraAtual = '';
-let dicaAtual = '';
-let temaAtual = '';
 let tentativasRestantes = 6;
-let letrasUsadas = [];
 let palavraExibida = [];
 let jogoAtivo = true;
 let placarVitorias = parseInt(sessionStorage.getItem('vitorias')) || 0;
 let placaDerrotas = parseInt(sessionStorage.getItem('derrotas')) || 0;
 
 
-function atualizarPlacar(recebePlacar) {
-    recebePlacar === 'V' ? placarVitorias++ : placaDerrotas++;
-    document.getElementById('vitorias').innerText = placarVitorias;
-    document.getElementById('derrotas').innerText = placaDerrotas;
-    sessionStorage.setItem('vitorias', placarVitorias);
-    sessionStorage.setItem('derrotas', placaDerrotas);
-    console.log(`Vitórias: ${placarVitorias}, Derrotas: ${placaDerrotas}`);
+function atualizarPlacar() {
+    localStorage.setItem('vitorias', vitorias);
+    localStorage.setItem('derrotas', derrotas);
+    console.log(`Vitórias: ${vitorias}, Derrotas: ${derrotas}`);
 }
 
 // Array com palavras, dicas e temas
@@ -49,45 +42,60 @@ const palavrasForca = [
     { palavra: "VULCAO", dica: "Fenômeno natural explosivo", tema: "Natureza" }
 ];
 
-// Função para escolher uma palavra aleatória do array
+// ------------------------------
+// Game Functions
+// ------------------------------
+
+// Initialize the game
+function initGame() {
+    configurarTecladoVirtual();
+    atualizarPlacar();
+    reiniciarJogo();
+}
+
+// Function to update score
+function atualizarPlacar() {
+    localStorage.setItem('vitorias', vitorias);
+    localStorage.setItem('derrotas', derrotas);
+    console.log(`Vitórias: ${vitorias}, Derrotas: ${derrotas}`);
+}
+
+// Function to choose a random word
 function escolherPalavraAleatoria() {
     const palavraObj = palavrasForca[Math.floor(Math.random() * palavrasForca.length)];
     palavraAtual = palavraObj.palavra;
-    dicaAtual = palavraObj.dica;
-    temaAtual = palavraObj.tema;
 
-    dicaElement.textContent = dicaAtual;
-    temaElement.textContent = temaAtual;
     palavraExibida = Array(palavraAtual.length).fill('_');
     atualizarPalavra();
 }
 
-// Função para configurar o teclado virtual
+// Function to configure the virtual keyboard
 function configurarTecladoVirtual() {
     const letras = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
     letras.forEach(letra => {
         const btn = document.createElement('button');
         btn.textContent = letra;
-        btn.classList.add('tecla');
+        btn.classList.add('button');
+        btn.id = `tecla-${letra}`;
         btn.addEventListener('click', () => tentarLetra(letra, btn));
         virtualKeyboard.appendChild(btn);
     });
 }
 
-// Função para atualizar a exibição da palavra
+// Function to update the displayed word
 function atualizarPalavra() {
     palavraElement.textContent = palavraExibida.join(' ');
 }
 
-// Função para processar a tentativa de uma letra
+// Function to process letter attempts
 function tentarLetra(letra, btn) {
-    if (!jogoAtivo || letrasUsadas.includes(letra)) return;
+    if (!jogoAtivo) return;
 
     btn.disabled = true;
-    btn.classList.add('tecla-usada');
+    btn.classList.add('tecla-correta');
 
-    letrasUsadas.push(letra);
-    letrasUsadasElement.textContent = letrasUsadas.join(', ');
+    const tecla = document.getElementById(`tecla-${letra}`);
+    tecla.disabled = true;
 
     if (palavraAtual.includes(letra)) {
         palavraAtual.split('').forEach((char, index) => {
@@ -95,74 +103,96 @@ function tentarLetra(letra, btn) {
                 palavraExibida[index] = letra;
             }
         });
+        tecla.classList.add('tecla-correta');
         atualizarPalavra();
         verificarVitoria();
     } else {
+        tecla.classList.add('tecla-errada');
         tentativasRestantes--;
-        tentativasElement.textContent = tentativasRestantes;
         mostrarParteDoBoneco();
+        tentativasElement.textContent = tentativasRestantes;
         verificarDerrota();
     }
 }
 
-// Função para mostrar a parte do boneco correspondente ao número de erros
+// ------------------------------
+// Hangman Drawing
+// ------------------------------
+const boneco = [
+    "O\n", // Head
+    "/  ", // Left arm
+    "M ", // Body
+    "\\\n", // Right arm
+    "/ ", // Left leg
+    "\\", // Right leg with space to align it
+];
+
+// Function to show the part of the hangman corresponding to the number of errors
 function mostrarParteDoBoneco() {
-    const partesDoBoneco = 6 - tentativasRestantes;
-    switch (partesDoBoneco) {
-        case 1:
-            headElement.style.visibility = 'visible';  // Cabeça
-            break;
-        case 2:
-            bodyElement.style.visibility = 'visible';  // Corpo
-            break;
-        case 3:
-            leftArmElement.style.visibility = 'visible';  // Braço esquerdo
-            break;
-        case 4:
-            rightArmElement.style.visibility = 'visible';  // Braço direito
-            break;
-        case 5:
-            leftLegElement.style.visibility = 'visible';  // Perna esquerda
-            break;
-        case 6:
-            rightLegElement.style.visibility = 'visible';  // Perna direita
-            break;
-    }
+    const parte = 5 - tentativasRestantes;
+    const containerBoneco = document.getElementById('stickmanDrawing');
+
+    // Remove spaces for last character and add current part
+    containerBoneco.textContent = containerBoneco.textContent.replace(/(?!\n)\s+/g, '') + boneco[parte];
 }
 
-// Função para verificar se o jogador venceu
+// ------------------------------
+// Game Over Checks
+// ------------------------------
 function verificarVitoria() {
     if (palavraExibida.join('') === palavraAtual) {
         alert('Parabéns, você venceu!');
         atualizarPlacar('V');
         jogoAtivo = false;
+        disableKeyboard();
     }
 }
 
-// Função para verificar se o jogador perdeu
 function verificarDerrota() {
     if (tentativasRestantes === 0) {
         alert(`Você perdeu! A palavra era: ${palavraAtual}`);
         atualizarPlacar('D');
         jogoAtivo = false;
+        disableKeyboard();
     }
 }
 
-// Função para reiniciar o jogo
+// ------------------------------
+// Keyboard Control
+// ------------------------------
+function resetKeyboard() {
+    Array.from(document.getElementsByClassName('button')).forEach(button => {
+        button.disabled = false; // Enable the button
+        button.classList.remove('tecla-errada', 'tecla-correta');
+    });
+}
+
+function disableKeyboard() {
+    Array.from(document.getElementsByClassName('button')).forEach(button => {
+        button.disabled = true; // Disable the button
+    });
+}
+
+// ------------------------------
+// Restart Game
+// ------------------------------
 function reiniciarJogo() {
     tentativasRestantes = 6;
-    letrasUsadas = [];
-    letrasUsadasElement.textContent = '';
     tentativasElement.textContent = tentativasRestantes;
     jogoAtivo = true;
 
-    // Esconder o boneco
-    boneco.forEach(part => part.style.visibility = 'hidden');
+    resetKeyboard();
+
+    // Hide the stickman drawing
+    document.getElementById('stickmanDrawing').textContent = '';
 
     escolherPalavraAleatoria();
 }
 
-// Configurar evento para chute de palavra inteira
+// ------------------------------
+// Event Listeners
+// ------------------------------
+// Event for guessing the full word
 btnChutarPalavra.addEventListener('click', () => {
     const chute = chutePalavraInput.value.toUpperCase();
     if (chute === palavraAtual) {
@@ -176,85 +206,75 @@ btnChutarPalavra.addEventListener('click', () => {
     }
 });
 
-// Configurar evento para reiniciar o jogo
+// Event for restarting the game
 btnReiniciar.addEventListener('click', reiniciarJogo);
 
-// Inicializar o jogo
-configurarTecladoVirtual();
-atualizarPlacar();
-reiniciarJogo();
+// ------------------------------
+// Initialize Game
+// ------------------------------
+initGame();
 
+// ------------------------------
+// Pokémon Functions
+// ------------------------------
 async function sortearPokemon() {
     try {
-        const response = await fetch(`https://pokeapi.co/api/v2/pokemon/?offset=20&limit=200`)
+        const response = await fetch(`https://pokeapi.co/api/v2/pokemon/?offset=20&limit=200`);
 
         if (!response.ok) {
-            throw new Error('Erro na requisição')
+            throw new Error('Erro na requisição');
         }
-        const data = await response.json()
+        const data = await response.json();
+        const infos = data.results.map(item => ({ name: item.name, url: item.url }));
+        const pokemon = infos[Math.floor(Math.random() * infos.length)];
 
-        const infos = []
+        const pokemonResponse = await fetch(pokemon.url);
+        const pokemonData = await pokemonResponse.json();
 
-        data.results.forEach(item => {
-            infos.push({ name: item.name, url: item.url })
-        })
-
-        const pokemon = (infos[Math.floor(Math.random() * (infos.length))])
-
-        const pokemonResponse = await fetch(pokemon.url)
-        const pokemonData = await pokemonResponse.json()
-
-        const pokeData = {
+        return {
             pokemonSorteado: pokemon.name,
             pokemonImg: pokemonData.sprites.other["dream_world"].front_default
-        }
-
-        return pokeData
-
+        };
     } catch (error) {
-        console.log(error)
+        console.log(error);
     }
 }
 
 // Mostrar array com os pokemons
 sortearPokemon().then((pokemon) => console.log(pokemon))
 
-async function selecionarDados() {
+async function selecionarDados () {
     const pokemon = await sortearPokemon()
 
-    const imgPokemon = document.querySelector('#pokeImg')
-    imgPokemon.src = pokemon.pokemonImg
+    const imgPokemon = document.querySelector('#pokeImg');
+    imgPokemon.src = pokemon.pokemonImg;
 
-    const pokeName = document.querySelector('#pokeName')
-    pokeName.innerText = pokemon.pokemonSorteado
+    const pokeName = document.querySelector('#pokeName');
+    pokeName.innerText = pokemon.pokemonSorteado;
 
-    const unders = pokemon.pokemonSorteado
-    const letters = unders.split('')
-    console.log(letters.length)
-    console.log(letters)
-
-    const encontrar = document.querySelector('.encontrar')
+    const letters = pokemon.pokemonSorteado.split('');
 
     letters.forEach(item => {
-        const novoCard = document.createElement('div')
-        const letterElement = document.createElement('p')
-        letterElement.innerText = item
+        const novoCard = document.createElement('div');
+        const letterElement = document.createElement('p');
+        letterElement.innerText = item;
 
         novoCard.appendChild(letterElement)
 
         novoCard.setAttribute('data-letra', item)
-        novoCard.classList.add(`card-letter`, `${item}`)
+        novoCard.classList.add(`card-letter`,`${item}`)
         encontrar.appendChild(novoCard)
 
         novoCard.addEventListener('click', () => {
-            handleShow(item)
-            letterElement.style.opacity = 100
-        })
+            handleShow(item);
+            letterElement.style.opacity = 100;
+        });
     });
 }
 
-selecionarDados()
+// Start Pokémon selection
+selecionarDados();
 
-function handleShow(item) {
-
+function handleShow(item){
+    
 }
