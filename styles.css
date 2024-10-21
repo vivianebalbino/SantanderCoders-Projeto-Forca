@@ -1,7 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Agdasima:wght@400;700&display=swap');
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: "Agdasima", sans-serif;
 }
 
 body {
@@ -22,12 +25,12 @@ body {
     align-items: center;
 }
 
-.pele{
+/* .pele{
     height: 100%;
     width: 100%;
     background-color: rgba(0, 0, 0, 0.438);
     position: absolute;
-}
+} */
 
 .game-info,
 .status {
@@ -132,7 +135,7 @@ header {
     font-weight: bold;
     background-color: #272e43;
     color: white;
-    z-index: 10;
+    z-index: 2;
     width: 100%;
 
 }
