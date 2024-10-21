@@ -7,6 +7,9 @@
     <title>Pokéforca</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="./styles/css-pokemon-gameboy.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
 <body>
@@ -16,6 +19,7 @@
     
     <div class="container">
         
+        <h2>Quem é esse pokémon?</h2>
         
         <session class="game">
             <h1 id="title">Jogo da Forca</h1>
@@ -23,37 +27,36 @@
             <div class="tentativas">
                 <span id="tentativas">6</span>
             </div>
-            <div class="game-info">
-                
                 <div class="image-container">
-                    
+
                     <img src="" id="pokeImg">
                 </div>
                 
                 <div class="word">
                     <p id="palavra">_ _ _ _ _ _ _ _</p>
                 </div>
+                
+            <div class="forca">
+                <pre id="stickmanDrawing"></pre>
             </div>
             
-            <div class="game-info">
-                <div class="placar">
-                    <p class="placar-vitorias">Vitórias: <span id="vitorias">0</span></p>
-                    <p class="placar-derrotas">Derrotas: <span id="derrotas">0</span></p>
-                </div>
-                <div class="forca">
-                    <pre id="stickmanDrawing"></pre>
-                </div>
-                
-            </div>
-            <div class="keyboard">
-                <div id="virtual-keyboard"></div>
-            </div>
         </session>
+        <div class="keyboard">
+            <div id="virtual-keyboard"></div>
+        </div>
 
         <div class="actions">
-            <input type="text" id="chute-palavra" placeholder="Digite sua palavra" />
-            <button id="btn-chutar-palavra">Chutar Palavra</button>
-            <button id="btn-reiniciar">Reiniciar</button>
+            <div class="painel-botoes">
+                <input type="text" id="chute-palavra" placeholder="Digite sua palavra" />
+                <button id="btn-chutar-palavra">
+                    <i class="fa-solid fa-flag"></i>
+                    <p>Chutar Palavra</p>
+                </button>
+                <button id="btn-reiniciar">
+                    <i class="fa-solid fa-bullseye"></i>
+                    <p>Reiniciar</p>
+                </button>
+            </div>
         </div>
     </div>
     <div id="placar">
