@@ -12,6 +12,7 @@ body {
     background-image: url('https://th.bing.com/th/id/OIG2.F3XPArgMheZrRuVaHl4q?pid=ImgGn');
     background-size: cover;
     background-position: center;
+    position: relative;
 }
 
 .container {
@@ -19,6 +20,13 @@ body {
     text-align: center;
     justify-content: space-evenly;
     align-items: center;
+}
+
+.pele{
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.438);
+    position: absolute;
 }
 
 .game-info,
@@ -120,6 +128,9 @@ header {
     font-weight: bold;
     background-color: #272e43;
     color: white;
+    z-index: 2;
+    position: absolute;
+    width: 100%;
 }
 
 #title {
