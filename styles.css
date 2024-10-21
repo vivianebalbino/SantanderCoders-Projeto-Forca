@@ -18,6 +18,22 @@ body {
     position: relative;
 }
 
+#chute-palavra{
+    border-radius: 5px;
+}
+
+#btn-chutar-palavra, #btn-reiniciar{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.painel-botoes{
+    display: flex;
+    justify-content: center;
+    gap: 3px;
+}
+
 .container {
     padding: 20px;
     text-align: center;
