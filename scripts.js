@@ -33,15 +33,6 @@ function atualizarPlacar() {
     console.log(`Vitórias: ${vitorias}, Derrotas: ${derrotas}`);
 }
 
-// Array com palavras, dicas e temas
-const palavrasForca = [
-    { palavra: "JAVASCRIPT", dica: "Linguagem de Programação", tema: "Tecnologia" },
-    { palavra: "ELEFANTE", dica: "Maior animal terrestre", tema: "Animais" },
-    { palavra: "BRASIL", dica: "País da América do Sul", tema: "Geografia" },
-    { palavra: "PIZZA", dica: "Comida italiana popular", tema: "Alimentação" },
-    { palavra: "VULCAO", dica: "Fenômeno natural explosivo", tema: "Natureza" }
-];
-
 // ------------------------------
 // Game Functions
 // ------------------------------
@@ -59,16 +50,6 @@ function atualizarPlacar() {
     localStorage.setItem('derrotas', derrotas);
     console.log(`Vitórias: ${vitorias}, Derrotas: ${derrotas}`);
 }
-
-// Function to choose a random word
-function escolherPalavraAleatoria() {
-    const palavraObj = palavrasForca[Math.floor(Math.random() * palavrasForca.length)];
-    palavraAtual = palavraObj.palavra;
-
-    palavraExibida = Array(palavraAtual.length).fill('_');
-    atualizarPalavra();
-}
-
 // Function to configure the virtual keyboard
 function configurarTecladoVirtual() {
     const letras = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
@@ -186,7 +167,7 @@ function reiniciarJogo() {
     // Hide the stickman drawing
     document.getElementById('stickmanDrawing').textContent = '';
 
-    escolherPalavraAleatoria();
+    sortearPokemon();
 }
 
 // ------------------------------
@@ -231,10 +212,14 @@ async function sortearPokemon() {
         const pokemonResponse = await fetch(pokemon.url);
         const pokemonData = await pokemonResponse.json();
 
-        return {
-            pokemonSorteado: pokemon.name,
-            pokemonImg: pokemonData.sprites.other["dream_world"].front_default
-        };
+        // Atualiza a imagem do Pokémon (se houver no seu HTML)
+        const imgPokemon = document.querySelector('#pokeImg');
+        imgPokemon.src = pokemonData.sprites.other["dream_world"].front_default;
+
+        // Define o nome do Pokémon como a palavra
+        palavraAtual = pokemon.name.toUpperCase();
+        palavraExibida = Array(palavraAtual.length).fill('_');
+        atualizarPalavra();  // Exibe a palavra com os underscores
     } catch (error) {
         console.log(error);
     }
@@ -243,37 +228,10 @@ async function sortearPokemon() {
 // Mostrar array com os pokemons
 sortearPokemon().then((pokemon) => console.log(pokemon))
 
-async function selecionarDados () {
-    const pokemon = await sortearPokemon()
 
-    const imgPokemon = document.querySelector('#pokeImg');
-    imgPokemon.src = pokemon.pokemonImg;
-
-    const pokeName = document.querySelector('#pokeName');
-    pokeName.innerText = pokemon.pokemonSorteado;
-
-    const letters = pokemon.pokemonSorteado.split('');
-
-    letters.forEach(item => {
-        const novoCard = document.createElement('div');
-        const letterElement = document.createElement('p');
-        letterElement.innerText = item;
-
-        novoCard.appendChild(letterElement)
-
-        novoCard.setAttribute('data-letra', item)
-        novoCard.classList.add(`card-letter`,`${item}`)
-        encontrar.appendChild(novoCard)
-
-        novoCard.addEventListener('click', () => {
-            handleShow(item);
-            letterElement.style.opacity = 100;
-        });
-    });
-}
 
 // Start Pokémon selection
-selecionarDados();
+reiniciarJogo();
 
 function handleShow(item){
     
