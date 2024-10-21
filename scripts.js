@@ -220,6 +220,8 @@ async function sortearPokemon() {
         palavraAtual = pokemon.name.toUpperCase();
         palavraExibida = Array(palavraAtual.length).fill('_');
         atualizarPalavra();  // Exibe a palavra com os underscores
+
+        console.log(palavraAtual)
     } catch (error) {
         console.log(error);
     }
@@ -227,8 +229,6 @@ async function sortearPokemon() {
 
 // Mostrar array com os pokemons
 sortearPokemon().then((pokemon) => console.log(pokemon))
-
-
 
 // Start Pokémon selection
 reiniciarJogo();

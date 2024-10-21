@@ -9,6 +9,9 @@ body {
     background-color: #f4f4f4;
     min-height: 100vh;
     min-width: 30px;
+    background-image: url('https://th.bing.com/th/id/OIG2.F3XPArgMheZrRuVaHl4q?pid=ImgGn');
+    background-size: cover;
+    background-position: center;
 }
 
 .container {
@@ -42,8 +45,6 @@ body {
     margin: 0 auto;
 }
 
-
-
 .actions {
     margin-top: 20px;
 }
@@ -76,7 +77,7 @@ body {
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    font-size: clamp(0.2rem, 4vw, 1.8rem);  
+    font-size: clamp(0.2rem, 4vw, 1.8rem);
 }
 
 .keyboard button:disabled {
@@ -98,7 +99,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    width:10vw;
+    width: 10vw;
     height: 10vw;
     border-radius: 8px;
     border: solid 1px black;
@@ -133,24 +134,27 @@ session {
 }
 
 img {
-    max-width:  100%;
+    max-width: 100%;
     height: auto;
     justify-self: center;
     align-self: center;
 }
 
 .game {
-    width: 80%;
+    width: 65%;
     min-width: 300px;
     margin: auto;
     padding: 20px;
-    background-color: white;
+    background-color: rgba(255, 255, 255, 0.884);
     border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
     text-align: center;
     display: flex;
     position: relative;
     flex-direction: column;
+    -webkit-box-shadow: 0px 0px 9px 0px rgba(0,0,0,1);
+    -moz-box-shadow: 0px 0px 9px 0px rgba(0,0,0,1);
+    box-shadow: 0px 0px 9px 0px rgba(0,0,0,1);
 }
 
 .game-info {
