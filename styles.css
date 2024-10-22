@@ -193,6 +193,7 @@ session {
 
 .game-info {
     display: flex;
+    justify-content: space-evenly;
     gap: 6vw
 }
 
@@ -229,4 +230,41 @@ pre {
 
 h2 {
     margin: 20px
+}
+
+.forca-container {
+    justify-content: space-evenly;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.forca-container p {
+    display: inline;
+    font-size: large;
+    margin: 10px;
+}
+
+.placar-derrotas {
+    font-weight: bold;
+    font-size: large;
+    margin: 10px;
+}
+
+.placar-vitorias {
+    font-weight: bold;
+    font-size: large;
+    margin: 10px;
+}
+
+#vitorias, #derrotas {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+#vitorias {
+    color: green;
+}
+
+#derrotas {
+    color: red;
 }
