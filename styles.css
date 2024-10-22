@@ -101,12 +101,16 @@ body {
 .keyboard button {
     margin: 5px;
     padding: 10px 15px;
-    background-color: #007bff;
-    color: white;
-    border: none;
+    border: 2px solid black;
+    color: black;
     border-radius: 5px;
     cursor: pointer;
     font-size: clamp(0.2rem, 4vw, 1.8rem);
+}
+
+.keyboard button:hover{
+    background-color: #272e43;
+    color: white;
 }
 
 .keyboard button:disabled {
