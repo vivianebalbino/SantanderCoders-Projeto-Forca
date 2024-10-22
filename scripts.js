@@ -33,6 +33,7 @@ let placaDerrotas = parseInt(sessionStorage.getItem('derrotas')) || 0;
 // Game Functions
 // ------------------------------
 
+
 // Function to update score
 function atualizarPlacar(recebePlacar) {
     debugger
