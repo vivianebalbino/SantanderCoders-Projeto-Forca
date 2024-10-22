@@ -114,18 +114,18 @@ body {
 }
 
 .keyboard button:disabled {
-    background-color: gray;
+    background-color: rgb(168, 168, 168);
     color: white;
 }
 
 .keyboard button.tecla-correta {
-    background-color: green;
-    color: white;
+    background-color: rgb(168, 252, 168);
+    color: black;
 }
 
 .keyboard button.tecla-errada {
-    background-color: red;
-    color: white;
+    background-color: rgb(233, 78, 78);
+    color: black;
 }
 
 .image-container {
