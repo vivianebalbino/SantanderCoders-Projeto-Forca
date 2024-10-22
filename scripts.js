@@ -27,15 +27,22 @@ let placarVitorias = parseInt(sessionStorage.getItem('vitorias')) || 0;
 let placaDerrotas = parseInt(sessionStorage.getItem('derrotas')) || 0;
 
 
-function atualizarPlacar() {
-    localStorage.setItem('vitorias', vitorias);
-    localStorage.setItem('derrotas', derrotas);
-    console.log(`Vitórias: ${vitorias}, Derrotas: ${derrotas}`);
-}
+
 
 // ------------------------------
 // Game Functions
 // ------------------------------
+
+// Function to update score
+function atualizarPlacar(recebePlacar) {
+    debugger
+    recebePlacar === 'V' ? placarVitorias++ : placaDerrotas++;
+    document.getElementById('vitorias').innerText = placarVitorias;
+    document.getElementById('derrotas').innerText = placaDerrotas;
+    sessionStorage.setItem('vitorias', placarVitorias);
+    sessionStorage.setItem('derrotas', placaDerrotas);
+    console.log(`Vitórias: ${placarVitorias}, Derrotas: ${placaDerrotas}`);
+}
 
 // Initialize the game
 function initGame() {
@@ -44,12 +51,7 @@ function initGame() {
     reiniciarJogo();
 }
 
-// Function to update score
-function atualizarPlacar() {
-    localStorage.setItem('vitorias', vitorias);
-    localStorage.setItem('derrotas', derrotas);
-    console.log(`Vitórias: ${vitorias}, Derrotas: ${derrotas}`);
-}
+
 // Function to configure the virtual keyboard
 function configurarTecladoVirtual() {
     const letras = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
@@ -233,6 +235,6 @@ sortearPokemon().then((pokemon) => console.log(pokemon))
 // Start Pokémon selection
 reiniciarJogo();
 
-function handleShow(item){
-    
+function handleShow(item) {
+
 }
